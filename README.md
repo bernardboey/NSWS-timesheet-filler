@@ -6,7 +6,7 @@ A script to automatically fill your timesheets on [NSWS (NUS Student Work Scheme
 #### 1. Python
 
 Use Python 3.9 or 3.10. To install the required Python dependencies (Selenium), run the following command:
-`pip install -r requirements.txt`
+`pip install -r requirements.txt`.
 
 #### 2. Selenium
 
