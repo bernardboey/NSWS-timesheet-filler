@@ -26,7 +26,7 @@ or you can include the location of the file in your PATH environment variable (l
 ## Usage
 
 *By using this script, you acknowledge that you are responsible for any potential errors and consequences, including but not limited to:
-Errors in timesheet information and the risks of browser automation.
+Errors in timesheet information, risks resulting from the mishandling of your username and/or password, and the risks of browser automation.
 The creator(s) and maintainer(s) of this script cannot be held liable for any such errors and consequences.*
 
 1. Open `main.py`
@@ -57,7 +57,14 @@ To be safe, you can select the "All" option to show all items (at the bottom lef
 
 ## Troubleshooting
 
-If you encounter any technical issues, please contact Bernard on Telegram ([@bernard_boey](https://t.me/bernard_boey)).
+If you encounter any technical issues or if you have any feedback, please contact Bernard on Telegram ([@bernard_boey](https://t.me/bernard_boey)).
+
+#### Rerunning script
+
+If for some reason the script failed halfway, with some timesheets added and some not added, you can rerun the script.
+The script checks if the timesheet that you want to add has already been added, and makes sure not to add duplicate timesheets.
+
+#### Deleting draft timesheets
 
 If for some reason you need to delete all the (draft) timesheets that you have added,
 you can do the following in the `main.py` file:
