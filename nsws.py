@@ -3,11 +3,11 @@ import datetime
 import collections
 
 from selenium import webdriver
+from selenium.common.exceptions import TimeoutException
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions
 from selenium.webdriver.support.select import Select
-
 
 Timesheet = collections.namedtuple("Timesheet", ["date", "time_in", "time_out", "break_", "gap", "others", "notes"])
 
@@ -84,8 +84,8 @@ class TimesheetAdder:
         self.wait(By.XPATH, "//app-student-menu/nav/div/div[1]/ul/li[4]")
         self.driver.get(self.job_url)
 
-    def wait(self, by: str, value: str):
-        wait = WebDriverWait(self.driver, timeout=10, poll_frequency=0.1)
+    def wait(self, by: str, value: str, timeout: float = 10):
+        wait = WebDriverWait(self.driver, timeout=timeout, poll_frequency=0.1)
         return wait.until(expected_conditions.element_to_be_clickable((by, value)))
 
     def wait_to_click(self, by: str, value: str):
@@ -165,10 +165,14 @@ class TimesheetAdder:
         # Wait for add new button to make sure that the page has loaded
         self.wait(By.XPATH, "//app-student-timesheet-hourly/div/div/div/button")
 
-        # Select all items to be displayed
-        select = Select(self.wait(By.XPATH, "//app-nsws-data-table-v2/div[2]/div/div/select"))
-        select.select_by_visible_text("All")
-        return self.driver.find_elements(By.XPATH, "//app-nsws-data-table-v2/div/table/tbody/tr")
+        try:
+            # Select all items to be displayed (select tag)
+            select = Select(self.wait(By.XPATH, "//app-nsws-data-table-v2/div[2]/div/div/select", timeout=1))
+            select.select_by_visible_text("All")
+            return self.driver.find_elements(By.XPATH, "//app-nsws-data-table-v2/div/table/tbody/tr")
+        # If no existing timesheets, then there will be no select tag
+        except TimeoutException:
+            return []
 
     def delete_all_draft_timesheets(self):
         while True:
