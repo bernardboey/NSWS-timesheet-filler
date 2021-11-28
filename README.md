@@ -59,6 +59,14 @@ To be safe, you can select the "All" option to show all items (at the bottom lef
 
 If you encounter any technical issues or if you have any feedback, please contact Bernard on Telegram ([@bernard_boey](https://t.me/bernard_boey)).
 
+#### Incorrect version of ChromeDriver
+
+If you see an error message similar to the one below, you need to download the correct version of ChromeDriver.
+```
+selenium.common.exceptions.SessionNotCreatedException: Message: session not created: This version of ChromeDriver only supports Chrome version 94
+Current browser version is 96.0.4664.45 with binary path C:\Program Files\Google\Chrome\Application\chrome.exe
+```
+
 #### Rerunning script
 
 If for some reason the script failed halfway, with some timesheets added and some not added, you can rerun the script.
